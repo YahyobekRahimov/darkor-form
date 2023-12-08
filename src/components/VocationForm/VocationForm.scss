@@ -1,0 +1,56 @@
+.fieldset {
+  padding: 32px 38px;
+  border-radius: 24px;
+  background: #fff;
+  width: 700px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.form__title {
+  color: var(--Dark, #2a2941);
+  font-feature-settings: "clig" off, "liga" off;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 130%; /* 41.6px */
+}
+
+.form__description {
+  color: var(--30-black, #b3b3b3);
+  font-family: Circular Std;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 130%; /* 20.8px */
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.select-group {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 10px;
+  align-items: center;
+}
+
+.select-group-location {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 10px;
+  align-items: center;
+}
+
+.salary-input {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 10px;
+}
+
+.applicant-level {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 10px;
+}

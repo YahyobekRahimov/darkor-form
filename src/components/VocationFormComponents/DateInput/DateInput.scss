@@ -1,0 +1,14 @@
+.date-deadline {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.date-deadline-input {
+  padding: 18px;
+  font-family: Circular Std;
+  font-size: 14px;
+  font-weight: 400;
+  border-radius: 14px;
+  border: 1px solid #e3e3e3;
+}
