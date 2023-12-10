@@ -1,3 +1,4 @@
+import Success from '../Success/Success';
 import Checkbox from '../VocationFormComponents/Checkbox/Checkbox';
 import DateInput from '../VocationFormComponents/DateInput/DateInput';
 import NumberInput from '../VocationFormComponents/NumberInput/NumberInput';
@@ -596,7 +597,8 @@ export default function VocationForm() {
     deadline: '',
     deadlineError: ''
   })
-
+  const [hasErrors, setHasErrors] = useState(false);
+  const [addSuccessPage, setAddSuccessPage] = useState(false);
   function handleSubmit() {
     if (inputData.title.length <= 3) {
       inputData.titleError = `Sarlavha 3 ta belgidan ko'p bo'lishi kerak`;
@@ -681,6 +683,28 @@ export default function VocationForm() {
     setInputData((prevData) => {
       return {...prevData, ...inputData}
     })
+
+    setAddSuccessPage(true);
+
+    if (!(inputData.titleError &&
+                  inputData.WorkTypeError &&
+                  inputData.jobScheduleError &&
+                  inputData.selectCountriesError &&
+                  inputData.asianCitiesError &&
+                  inputData.asianLanguagesError &&
+                  inputData.languageProficiencyError &&
+                  inputData.industryError &&
+                  inputData.skillsError &&
+                  inputData.minimumSalaryError &&
+                  inputData.maximumSalaryError &&
+                  inputData.educationLevelsError &&
+                  inputData.experienceError &&
+                  inputData.descriptionTextareaError &&
+                  inputData.deadlineError)) {  
+        setHasErrors(true);
+      } else {
+        setHasErrors(false);
+      }
   }
 
   function handleChange(event) {
@@ -851,6 +875,7 @@ export default function VocationForm() {
           handleSubmit={handleSubmit}
           />
       </form>
+      {addSuccessPage ? (!hasErrors ? Success() : null) : null}
     </fieldset>
   )
 }
