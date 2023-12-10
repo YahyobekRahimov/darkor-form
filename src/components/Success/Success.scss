@@ -1,0 +1,40 @@
+.success-wrapper {
+    width: 800px;
+    margin-right: auto;
+    margin-left: auto;
+    height: 400px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+    &::after {
+        content: '';
+        backdrop-filter: blur(4px);
+        width: 200vw;
+        height: 200vh;
+        position: fixed;
+        top: -50vh;
+        left: -50vw;
+        z-index: -1;
+    }
+}
+
+.another-vacancy-form {
+    font-size: 25px;
+    padding: 18px;
+    background: transparent;
+    border: 2px solid lightblue;
+    color: rgb(3, 117, 156);
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    &:hover {
+        background-color: lightblue;
+    }
+}

@@ -18,6 +18,7 @@
   border: 1px solid #e3e3e3;
   font-size: 14px;
   font-weight: 450;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   &::placeholder {
     color: var(--Gray, #6e6d77);
     font-size: 14px;

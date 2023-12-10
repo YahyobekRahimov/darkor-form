@@ -8,10 +8,8 @@ import TextInput from '../VocationFormComponents/TextInput/TextInput';
 import './VocationForm.scss';
 import { useState } from 'react';
 
-export default function VocationForm() {
-  const [title, setTitle] = useState('');
-  const [deadline, setDeadline] = useState('');
-  const workTypes = [
+
+const workTypes = [
   {
     title: 'Programming',
     value: 'programming'
@@ -558,130 +556,300 @@ export default function VocationForm() {
     // Add more experience options as needed
   ];
   
-  
-  
-  
-  
-  function handleTitleChange(event) {
-    setTitle(event.target.value);
+
+
+export default function VocationForm() {
+  const [inputData, setInputData] = useState({
+    title: '',
+    titleError: '',
+    date: '',
+    dateError: '',
+    WorkType: '',
+    WorkTypeError: '',
+    jobSchedule: '',
+    jobScheduleError: '',
+    selectCountries: '',
+    selectCountriesError: '',
+    asianCities: '',
+    asianCitiesError: '',
+    asianLanguages: '',
+    asianLanguagesError: '',
+    languageProficiency: '',
+    languageProficiencyError: '',
+    educationLevels: '',
+    educationLevelsError: '',
+    industry: '',
+    industryError: '',
+    skills: '',
+    skillsError: '',
+    minimumSalary: '',
+    minimumSalaryError: '',
+    maximumSalary: '',
+    maximumSalaryError: '',
+    bargainCheckbox: false,
+    applicantLevel: '',
+    applicantLevelError: '',
+    experience: '',
+    experienceError: '',
+    descriptionTextarea: '',
+    descriptionTextareaError: '',
+    deadline: '',
+    deadlineError: ''
+  })
+
+  function handleSubmit() {
+    if (inputData.title.length <= 3) {
+      inputData.titleError = `Sarlavha 3 ta belgidan ko'p bo'lishi kerak`;
+    } else {
+      inputData.titleError = ``;
+    }
+    if (!inputData.WorkType.length) {
+      inputData.WorkTypeError = `Ish turnini tanlashingiz shart`;
+    } else {
+      inputData.WorkTypeError = ``;
+    }
+    if (!inputData.jobSchedule.length) {
+      inputData.jobScheduleError = `Ish vaqtini tanlashingiz shart`;
+    } else {
+      inputData.jobScheduleError = ``;
+    }
+    if (!inputData.selectCountries.length) {
+      inputData.selectCountriesError = `Davlatni tanlashingiz shart`;
+    } else {
+      inputData.selectCountriesError = ``;
+    }
+    if (!inputData.asianCities.length) {
+      inputData.asianCitiesError = `Shaharni tanlashingiz shart`;
+    } else {
+      inputData.asianCitiesError = ``;
+    }
+    if (!inputData.asianLanguages.length) {
+      inputData.asianLanguagesError = `Tilni tanlashingiz shart`;
+    } else {
+      inputData.asianLanguagesError = ``;
+    }
+    if (!inputData.languageProficiency.length) {
+      inputData.languageProficiencyError = `Tilni tanlashingiz shart`;
+    } else {
+      inputData.languageProficiencyError = ``;
+    }
+    if (!inputData.languageProficiency.length) {
+      inputData.languageProficiencyError = `Tilni tanlashingiz shart`;
+    } else {
+      inputData.languageProficiencyError = ``;
+    }
+    if (!inputData.industry.length) {
+      inputData.industryError = `Sohani kiritishingiz shart`;
+    } else {
+      inputData.industryError = ``;
+    }
+    if (!inputData.skills.length) {
+      inputData.skillsError = `Ko'nikmalarni kiritishingiz shart`;
+    } else {
+      inputData.skillsError = ``;
+    }
+    if (!inputData.minimumSalary.length) {
+      inputData.minimumSalaryError = `Minimum maoshni kiritishingiz shart`;
+    } else {
+      inputData.minimumSalaryError = ``;
+    }
+    if (!inputData.maximumSalary.length) {
+      inputData.maximumSalaryError = `Maximum maoshni kiritishingiz shart`;
+    } else {
+      inputData.maximumSalaryError = ``;
+    }
+    if (!inputData.educationLevels.length) {
+      inputData.educationLevelsError = "Ta'lim darajasini tanlashingiz shart";
+    } else {
+      inputData.educationLevelsError = "";
+    }
+    if (!inputData.experience.length) {
+      inputData.experienceError = "Tajriba oralig'ini tanlashingiz shart";
+    } else {
+      inputData.experienceError = "";
+    }
+    if (!inputData.descriptionTextarea.length) {
+      inputData.descriptionTextareaError = "Izoh qoldirishingiz shart";
+    } else {
+      inputData.descriptionTextareaError = "";
+    }
+    if (!inputData.deadline.length) {
+      inputData.deadlineError = "Ariza muddatini qoldirishingiz shart";
+    } else {
+      inputData.deadlineError = "";
+    }
+    setInputData((prevData) => {
+      return {...prevData, ...inputData}
+    })
   }
-  function handleDeadlineChange(e) {
-    setDeadline(e.target.value);
-    console.log(deadline);
+
+  function handleChange(event) {
+    const prevData = inputData;
+    if (event.target.name == 'bargainCheckbox') {
+      inputData[event.target.name] = event.target.checked;
+    } else {
+      inputData[event.target.name] = event.target.value;
+    }
+    setInputData(() => {
+      return {...prevData, ...inputData}
+    });
   }
+  
   return (
     <fieldset className='fieldset'>
         <h1 className='form__title'>Vakansiya yaratish</h1>
         <p className='form__description'>Yangi vakansiya uchun ma'lumotlar</p>
       <form className='form'>
         <TextInput 
-        id='title' 
-        label='Sarlavha' 
-        placeholder='Sarlavha' 
-        handleChange={handleTitleChange}
-        isRequired={true}
+          id='title' 
+          name='title'
+          label='Sarlavha' 
+          placeholder='Sarlavha' 
+          handleChange={handleChange}
+          isRequired={true}
+          errorText={inputData['titleError']}
         />
 
         <div className="select-group">
           <DateInput
-          id='deadline'
-          placeholder='Deadline'
-          title='Ariza topshirish muddati'
-          isRequired={true}
-          handleChange={handleDeadlineChange}
+            id='deadline'
+            name='deadline'
+            placeholder='Deadline'
+            title='Ariza topshirish muddati'
+            isRequired={true}
+            handleChange={handleChange}
+            errorText={inputData['deadlineError']}
           />
 
           <SelectOption 
-          options={workTypes}
-          id='WorkType'
-          name='Ish turi'
+            options={workTypes}
+            id='WorkType'
+            name='WorkType'
+            label='Ish turi'
+            handleChange={handleChange}
+            errorText={inputData['WorkTypeError']}
           />
 
           <SelectOption 
-          options={jobSchedules}
-          id='jobSchedule'
-          name='Ish vaqti'
+            options={jobSchedules}
+            id='jobSchedule'
+            name='jobSchedule'
+            label='Ish vaqti'
+            handleChange={handleChange}
+            errorText={inputData['jobScheduleError']}
           />
         </div>
 
         <div className="select-group-location">
           <SelectOption 
-          options={asianCountries}
-          id='selectCountries'
-          name="Davlat"
+            options={asianCountries}
+            id='selectCountries'
+            name='selectCountries'
+            handleChange={handleChange}
+            label="Davlat"
+            errorText={inputData['selectCountriesError']}
           />
           <SelectOption 
-          options={asianCities}
-          id='asianCities'
-          name='Shahar'
+            options={asianCities}
+            id='asianCities'
+            name='asianCities'
+            label='Shahar'
+            handleChange={handleChange}
+            errorText={inputData['asianCitiesError']}
           />
         </div>
         <div className="select-group-location">
           <SelectOption 
-          options={asianLanguages}
-          id='asianLanguages'
-          name="Til"
+            options={asianLanguages}
+            id='asianLanguages'
+            name='asianLanguages'
+            label="Til"
+            handleChange={handleChange}
+            errorText={inputData['asianLanguagesError']}
           />
           <SelectOption 
-          options={languageProficiency}
-          id='languageProficiency'
-          name='Darajasi'
+            options={languageProficiency}
+            id='languageProficiency'
+            name='languageProficiency'
+            label='Darajasi'
+            handleChange={handleChange}
+            errorText={inputData['languageProficiencyError']}
           />
         </div>
         <TextInput 
-        id='industry' 
-        label='Soha' 
-        placeholder='Soha' 
-        handleChange={handleTitleChange}
-        isRequired={true}
+          id='industry' 
+          name='industry' 
+          label='Soha' 
+          placeholder='Soha' 
+          handleChange={handleChange}
+          isRequired={true}
+          errorText={inputData['industryError']}
         />
         <TextInput 
-        id='skills' 
-        label="Ko'nikmalar" 
-        placeholder="Ko'nikmalar" 
-        handleChange={handleTitleChange}
-        isRequired={true}
+          id='skills' 
+          name='skills' 
+          label="Ko'nikmalar" 
+          placeholder="Ko'nikmalar" 
+          handleChange={handleChange}
+          isRequired={true}
+          errorText={inputData['skillsError']}
         />
         <div className="salary-input">
           <NumberInput 
-          id='minimumSalary'
-          label='Minimal maosh'
-          placeholder='Min'
-          handleChange={handleTitleChange}
-          isRequired={true}
+            id='minimumSalary'
+            name='minimumSalary'
+            label='Minimal maosh'
+            placeholder='Min'
+            handleChange={handleChange}
+            isRequired={true}
+            errorText={inputData['minimumSalaryError']}
           />
           <NumberInput 
-          id='maximumSalary'
-          label='Maximum maosh'
-          placeholder='Max'
-          handleChange={handleTitleChange}
-          isRequired={true}
+            id='maximumSalary'
+            name='maximumSalary'
+            label='Maximum maosh'
+            placeholder='Max'
+            handleChange={handleChange}
+            isRequired={true}
+            errorText={inputData['maximumSalaryError']}
           />
         </div>
         <Checkbox 
-        id='bargain-checkbox'
-        title='Kelishiladi'
+          id='bargainCheckbox'
+          name='bargainCheckbox'
+          title='Kelishiladi'
+          handleChange={handleChange}
         />
         <div className="applicant-level">
           <SelectOption 
-          options={educationLevels}
-          id='applicantLevel'
-          name='Darajasi'
+            options={educationLevels}
+            id='applicantLevel'
+            name='educationLevels'
+            label="Ta'lim darajasi"
+            handleChange={handleChange}
+            errorText={inputData['educationLevelsError']}
           />
           <SelectOption 
-          options={experienceOptions}
-          id='experience'
-          name='Tajriba'
+            options={experienceOptions}
+            id='experience'
+            name='experience'
+            label='Tajriba'
+            handleChange={handleChange}
+            errorText={inputData['experienceError']}
           />
         </div>
         <TextArea
-        id='description-textarea'
-        label='Izoh'
-        placeholder='Vakansiya uchun izoh qoldiring'
-        handleChange={handleTitleChange}
-        isRequired={true}
+          id='descriptionTextarea'
+          name='descriptionTextarea'
+          label='Izoh'
+          placeholder='Vakansiya uchun izoh qoldiring'
+          isRequired={true}
+          handleChange={handleChange}
+          errorText={inputData['descriptionTextareaError']}
          />
-         <SubmitButton />
+         <SubmitButton
+          handleSubmit={handleSubmit}
+          />
       </form>
     </fieldset>
   )

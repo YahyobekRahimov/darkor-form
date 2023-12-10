@@ -1,8 +1,9 @@
 import './SubmitButton.scss';
 
-export default function SubmitButton() {
+export default function SubmitButton(props) {
+  const {handleSubmit} = props;
   return (
-    <button type='button' className='Submit-button'>
+    <button type='button' onClick={handleSubmit} className='Submit-button'>
         Davom etish
     </button>
   )
